@@ -10,7 +10,7 @@
 - name: Checking download
   debug: msg={{jira_archive}}
 
-- name: "Unpackage atlassian-jira-software-{{version}}.tar.gz"
+- name: Unpackage atlassian-jira-software
   unarchive:
     src: /opt/atlassian-jira-software-{{version}}.tar.gz
     dest: /opt/atlassian-jira-software-{{version}}
