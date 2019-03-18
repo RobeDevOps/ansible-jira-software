@@ -7,7 +7,7 @@
     owner: "{{jira_user}}"
   register: jira_archive
 
-- name: Unpackage atlassian-jira-software-8.0.2.tar.gz
+- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
     src: "/opt/atlassian-jira-software-8.0.2.tar.gz"
     dest: "/opt/atlassian-jira-software-8.0.2"
