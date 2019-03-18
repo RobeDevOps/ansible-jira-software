@@ -7,14 +7,14 @@
     owner: '{{jira_user}}'
   register: jira_archive
 
-# - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
-#   unarchive:
-#     src: /opt/atlassian-jira-software-{{version}}.tar.gz
-#     dest: /opt/atlassian-jira-software-{{version}}
-#     owner: "{{jira_user}}"
-#     mode: 0755
-#   when: jira_archive.changed
-#   ignore_erros: yes
+- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
+  unarchive:
+    src: /opt/atlassian-jira-software-{{version}}.tar.gz
+    dest: /opt/atlassian-jira-software-{{version}}
+    owner: "{{jira_user}}"
+    mode: 0755
+  when: jira_archive.changed
+  ignore_erros: yes
     
 # - name: Create JIRA directories
 #   file: 
