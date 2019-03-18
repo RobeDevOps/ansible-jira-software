@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: jira
   become: Yes
   gather_facts: Yes
   tasks:
