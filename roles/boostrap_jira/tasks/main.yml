@@ -8,7 +8,7 @@
   register: jira_archive
 
 - name: Checking download
-  debug: msg="{{jira_archive.changed}}"
+  debug: msg="{{jira_archive}}"
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
@@ -16,9 +16,8 @@
     dest: /opt/atlassian-jira-software-{{version}}
     owner: "{{jira_user}}"
     mode: 0755
-  when: jira_archive.changed == true
+  when: jira_archive.changed
     
-
 - name: Create JIRA directories
   file: 
     path: "{{item}}"
