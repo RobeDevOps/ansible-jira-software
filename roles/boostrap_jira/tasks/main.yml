@@ -15,11 +15,11 @@
   when: jira_archive.changed
   ignore_errors: yes
     
-# - name: Create JIRA directories
-#   file: 
-#     path: "{{item}}"
-#     owner: "{{jira_user}}"
-#     state: directory
-#   with_items:
-#     - "{{jira_installation}}"
-#     - "{{jira_home_data}}"
+- name: Create JIRA directories
+  file: 
+    path: "{{item}}"
+    owner: "{{jira_user}}"
+    state: directory
+  with_items:
+    - "{{jira_installation}}"
+    - "{{jira_home_data}}"
