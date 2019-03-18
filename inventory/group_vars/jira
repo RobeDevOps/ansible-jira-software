@@ -1,0 +1,5 @@
+---
+version: 8.0.2
+jira_installation: /opt/atlassian/jira
+jira_home_data: /var/atlassian/application-data/jira
+jira_user: jira
