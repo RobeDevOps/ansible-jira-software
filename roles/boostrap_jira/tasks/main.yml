@@ -13,7 +13,7 @@
     dest: "/opt/atlassian-jira-software-8.0.2"
     owner: jira
   when: jira_archive.changed
-  ignore_erros: yes
+  ignore_errors: yes
     
 # - name: Create JIRA directories
 #   file: 
