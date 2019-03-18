@@ -4,6 +4,11 @@
     url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
     dest: /opt/atlassian-jira-software-{{version}}.tar.gz
     mode: 0400
+    owner: "{{jira_user}}"
+    register: jira_archive
+
+- name: Checking download
+  debug: msg="{{jira_archive}}"
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
@@ -11,6 +16,7 @@
     dest: /opt/atlassian-jira-software-{{version}}
     owner: "{{jira_user}}"
     mode: 0755
+    
 
 - name: Create JIRA directories
   file: 
