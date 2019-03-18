@@ -3,6 +3,8 @@
   become: Yes
   gather_facts: Yes
   tasks:
-    - name: Download the jira binary
-      debug: 
-        msg: "Downloading jira - {{version}}"
+    - name: Download k3s binary
+      get_url:
+        url: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}-x64.bin"
+        dest: /opt/atlassian-jira-software-{{version}}-x64.bin
+        mode: 0111
