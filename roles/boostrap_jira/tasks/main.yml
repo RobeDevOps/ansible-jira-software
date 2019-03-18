@@ -5,7 +5,7 @@
     dest: /opt/atlassian-jira-software-{{version}}.tar.gz
     mode: 0400
     owner: "{{jira_user}}"
-    register: jira_archive
+  register: jira_archive
 
 - name: Checking download
   debug: msg="{{jira_archive}}"
