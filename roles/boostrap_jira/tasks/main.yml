@@ -6,6 +6,12 @@
     owner: "{{jira_user}}"
   register: jira_archive
 
+- name: Create installer directory
+  file: 
+    path: "/opt/atlassian-jira-software-{{version}}"
+    owner: "{{jira_user}}"
+    state: directory
+
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
     src: "/opt/atlassian-jira-software-{{version}}.tar.gz"
