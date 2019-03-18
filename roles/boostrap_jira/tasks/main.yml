@@ -1,22 +1,23 @@
 ---
-# - name: Download atlassian-jira-software-{{version}}.tar.gz
-#   get_url:
-#     url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
-#     dest: /opt/atlassian-jira-software-{{version}}.tar.gz
-#     owner: "{{jira_user}}"
-#   register: jira_archive
+- name: Download atlassian-jira-software-{{version}}.tar.gz
+  get_url:
+    url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
+    dest: /opt/atlassian-jira-software-{{version}}.tar.gz
+    owner: "{{jira_user}}"
+  register: jira_archive
 
-# - name: Create installer directory
-#   file: 
-#     path: "/opt/atlassian-jira-software-{{version}}"
-#     owner: "{{jira_user}}"
-#     state: directory
+- name: Create installer directory
+  file: 
+    path: "/opt/atlassian-jira-software-{{version}}"
+    owner: "{{jira_user}}"
+    state: directory
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
-    src: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz"
-    dest: "/opt"
+    src: "/opt/atlassian-jira-software-{{version}}.tar.gz"
+    dest: "/opt/atlassian-jira-software-{{version}}"
     owner: "{{jira_user}}"
+  when: jira_archive.changed
   ignore_errors: yes
     
 - name: Create JIRA directories
