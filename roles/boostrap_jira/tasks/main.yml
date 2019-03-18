@@ -1,6 +1,22 @@
 ---
-- name: Download k3s binary
+- name: Download atlassian-jira-software-{{version}}.tar.gz
   get_url:
     url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
     dest: /opt/atlassian-jira-software-{{version}}.tar.gz
     mode: 0400
+
+- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
+  unarchive:
+    src: /opt/atlassian-jira-software-{{version}}.tar.gz
+    dest: /opt/atlassian-jira-software-{{version}}
+    owner: "{{jira_user}}"
+    mode: 0755
+
+- name: Create JIRA directories
+  file: 
+    path: "{{item}}"
+    owner: "{{jira_user}}"
+    state: directory
+  with_items:
+    - "{{jira_installation}}"
+    - "{{jira_home_data}}"
