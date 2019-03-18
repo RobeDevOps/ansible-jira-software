@@ -17,6 +17,7 @@
     owner: "{{jira_user}}"
     mode: 0755
   when: jira_archive.changed
+  ignore_erros: yes
     
 - name: Create JIRA directories
   file: 
