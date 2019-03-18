@@ -8,7 +8,7 @@
   register: jira_archive
 
 - name: Checking download
-  debug: msg="{{jira_archive}}"
+  debug: msg={{jira_archive}}
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
