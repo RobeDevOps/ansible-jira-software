@@ -17,7 +17,6 @@
     src: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz"
     dest: "/opt"
     owner: "{{jira_user}}"
-  when: jira_archive.changed
   ignore_errors: yes
     
 - name: Create JIRA directories
