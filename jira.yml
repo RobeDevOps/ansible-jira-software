@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  become: Yes
+  gather_facts: Yes
+  tasks:
+    - debug:
+        msg: "there is an example"
