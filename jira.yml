@@ -3,5 +3,6 @@
   become: Yes
   gather_facts: Yes
   tasks:
-    - debug:
-        msg: "there is an example"
+    - name: Download the jira binary
+      debug: 
+        msg: "Downloading jira - {{version}}"
