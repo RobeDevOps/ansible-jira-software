@@ -16,7 +16,7 @@
     dest: /opt/atlassian-jira-software-{{version}}
     owner: "{{jira_user}}"
     mode: 0755
-    when: jira_archive.changed == true
+    when: jira_archive.changed
     
 
 - name: Create JIRA directories
