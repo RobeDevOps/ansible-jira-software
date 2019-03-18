@@ -1,2 +1,6 @@
 [jira]
-localhost ansible_connection=local
+127.0.0.1 
+
+[all:vars]
+ansible_connection=local
+ansible_sudo_pass=ansible
