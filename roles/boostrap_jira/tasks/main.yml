@@ -29,5 +29,6 @@
   file:
     path: "{{jira_installation}}"
     owner: "{{jira_user}}"
+    group: "{{jira_user}}"
     state: directory
     recurse: yes
