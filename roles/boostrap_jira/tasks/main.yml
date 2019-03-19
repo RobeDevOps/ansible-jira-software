@@ -24,3 +24,9 @@
 - name: Copying download files into {{jira_installation}}
   shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
   when: jira_archive.changed
+
+- name: Set right permission to {{jira_installation}}
+  file:
+    path: "{{jira_installation}}"
+    owner: "{{jira_user}}"
+    state: directory
