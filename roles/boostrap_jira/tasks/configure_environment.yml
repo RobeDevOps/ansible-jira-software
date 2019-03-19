@@ -5,19 +5,18 @@
     dest: "{{jira_install_dir}}/atlassian-jira/WEB-INF/classes/jira-application.properties"
   notify: Restart JIRA service
 
-- name: Get JAVA_HOME
+- name: Getting variable JAVA_HOME
   shell: >
     jrunscript -e "java.lang.System.out.println(java.lang.System.getProperty('java.home'))";
-  register: java_home_result
+  register: system_java_home
 
-- name: See java JAVA_HOME
-  debug:
-    msg: "{{java_home_result}}"
+- name: JAVA_HOME
+  debug: msg={{system_java_home}}
 
-- name: Configure JAVA_HOME
+- name: Setting variable JAVA_HOME
   template:
-    src: jira-application.properties.j2
-    dest: "{{jira_install_dir}}/atlassian-jira/"
+    src: setenv.sh.j2
+    dest: "{{jira_install_dir}}/bin/setenv.sh"
   notify: Restart JIRA service
 
 - name: Configure Jira server.xml
