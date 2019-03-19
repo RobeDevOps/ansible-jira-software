@@ -22,5 +22,5 @@
   ignore_errors: yes
 
 - name: Copying download files into {{jira_installation}}
-  command: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
+  shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
   when: jira_archive.changed
