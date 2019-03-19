@@ -18,7 +18,7 @@
 
 - name: Init postgresql
   shell: >
-    /usr/pgsql-9.6/bin/initdb 
+    /usr/pgsql-9.6/bin/initdb -D /var/lib/pgsql/9.6/data/
   when: 
     - db_dir is defined 
     - db_dir.stdout == ""
