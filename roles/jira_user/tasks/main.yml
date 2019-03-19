@@ -1,5 +1,5 @@
 ---
-- name: Create new {{jira_user}}
+- name: Create new user [{{jira_user}}]
   user:
     name: "{{jira_user}}"
     comment: Dedicated user to run just jira service
