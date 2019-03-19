@@ -1,25 +1,4 @@
 ---
-- name: Download atlassian-jira-software-{{version}}.tar.gz
-  get_url:
-    url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
-    dest: /opt/atlassian-jira-software-{{version}}.tar.gz
-    owner: "{{jira_user}}"
-  register: jira_archive
-
-- name: Create installer directory
-  file: 
-    path: "/opt/atlassian-jira-software-{{version}}"
-    owner: "{{jira_user}}"
-    state: directory
-
-- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
-  unarchive:
-    src: "/opt/atlassian-jira-software-{{version}}.tar.gz"
-    dest: "/opt/atlassian-jira-software-{{version}}"
-    owner: "{{jira_user}}"
-  when: jira_archive.changed
-  ignore_errors: yes
-    
 - name: Create JIRA directories
   file: 
     path: "{{item}}"
@@ -28,3 +7,24 @@
   with_items:
     - "{{jira_installation}}"
     - "{{jira_home_data}}"
+
+- name: Download atlassian-jira-software-{{version}}.tar.gz
+  get_url:
+    url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
+    dest: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
+    owner: "{{jira_user}}"
+  register: jira_archive
+
+- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
+  unarchive:
+    src: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
+    dest: "/tmp/"
+    owner: "{{jira_user}}"
+  when: jira_archive.changed
+  ignore_errors: yes
+
+- name: Copying download files into {{jira_installation}}
+  command: mv atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
+  args:
+    chdir: /tmp
+  when: jira_archive.changed
