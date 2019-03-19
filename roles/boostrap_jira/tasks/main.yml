@@ -12,14 +12,12 @@
   get_url:
     url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
     dest: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
-    owner: "{{jira_user}}"
   register: jira_archive
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
     src: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
     dest: "/tmp/"
-    owner: "{{jira_user}}"
   when: jira_archive.changed
   ignore_errors: yes
 
