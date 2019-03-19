@@ -16,8 +16,8 @@
 
 - name: Unpackage atlassian-jira-software-{{version}}.tar.gz
   unarchive:
-    src: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
-    dest: "/tmp"
+    src: /tmp/atlassian-jira-software-{{version}}.tar.gz
+    dest: /tmp
   when: jira_archive.changed
   ignore_errors: yes
 
