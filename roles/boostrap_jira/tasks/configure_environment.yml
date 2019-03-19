@@ -9,12 +9,10 @@
   shell: >
     jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));
   register: java_home_result
-  tags: java
 
 - name: See java JAVA_HOME
   debug:
     msg: "java_home_result"
-  tags: java
 
 - name: Configure JAVA_HOME
   template:
