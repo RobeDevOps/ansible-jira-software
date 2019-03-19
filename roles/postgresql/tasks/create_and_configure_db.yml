@@ -12,10 +12,10 @@
     name: "{{jira_db_user}}"
     password: "{{jira_db_passwd}}"
 
-  - name: Ensure access for user[{{jira_db_user}}]
-    become_user: postgres
-    postgresql_privs:
-      db: "{{jira_db_name}}"
-      role: "{{jira_db_user}}"
-      objs: ALL_IN_SCHEMA
-      privs: SELECT,INSERT,UPDATE,DELETE,CONNECT
+- name: Ensure access for user[{{jira_db_user}}]
+  become_user: postgres
+  postgresql_privs:
+    db: "{{jira_db_name}}"
+    role: "{{jira_db_user}}"
+    objs: ALL_IN_SCHEMA
+    privs: SELECT,INSERT,UPDATE,DELETE,CONNECT
