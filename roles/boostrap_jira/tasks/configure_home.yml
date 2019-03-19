@@ -1,5 +1,5 @@
 ---
-- name: Configure Jira home directory
+- name: Configure Jira home directory[{{jira_home_dir}}]
   template:
     src: jira-application.properties.j2
     dest: "{{jira_install_dir}}/atlassian-jira/WEB-INF/classes/jira-application.properties"
