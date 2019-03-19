@@ -15,12 +15,11 @@
   shell: >
     ls /var/lib/pgsql/9.6/data/
   register: db_dir
-  when: not check_mode
 
 - name: Init postgresql
   shell: >
     /usr/pgsql-9.6/bin/initdb 
   when: 
-    - not check_mode 
     - db_dir is defined 
     - db_dir.stdout != ""
+  ignore_errors: "{{ ansible_check_mode }}"
