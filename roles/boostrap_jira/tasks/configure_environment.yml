@@ -7,7 +7,7 @@
 
 - name: Get JAVA_HOME
   shell: >
-    jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));
+    jrunscript -e "java.lang.System.out.println(java.lang.System.getProperty('java.home'))";
   register: java_home_result
 
 - name: See java JAVA_HOME
