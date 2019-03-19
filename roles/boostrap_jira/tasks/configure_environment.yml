@@ -10,14 +10,15 @@
     jrunscript -e "java.lang.System.out.println(java.lang.System.getProperty('java.home'))";
   register: system_java_home
 
-- name: JAVA_HOME
-  debug: msg={{system_java_home}}
+# - name: JAVA_HOME
+#   debug: msg={{system_java_home}}
 
 - name: Setting variable JAVA_HOME
   template:
     src: setenv.sh.j2
     dest: "{{jira_install_dir}}/bin/setenv.sh"
   notify: Restart JIRA service
+  when: system_java_home is defined and system_java_home.rc == 0
 
 - name: Configure Jira server.xml
   template:
