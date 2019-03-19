@@ -17,7 +17,7 @@
   register: db_dir
 
 - name: See data dir
-  debug: msg="db_dir"
+  debug: msg="{{db_dir}}"
 
 - name: Init postgresql
   shell: >
