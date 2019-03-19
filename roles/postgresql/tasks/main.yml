@@ -5,8 +5,8 @@
     state: present
     update_cache: yes
 
-- name: Install postgresql{{postgres_version}}-server
+- name: Install package[{{postgres_package}}]
   yum:
-    name: postgresql{{postgres_version}}-server
+    name: {{postgres_package}}
     state: present
     update_cache: yes
