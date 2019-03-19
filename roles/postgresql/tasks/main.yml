@@ -7,6 +7,6 @@
 
 - name: Install package[{{postgres_package}}]
   yum:
-    name: {{postgres_package}}
+    name: "{{postgres_package}}"
     state: present
     update_cache: yes
