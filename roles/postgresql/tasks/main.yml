@@ -20,5 +20,7 @@
 - name: Init postgresql
   shell: >
     /usr/pgsql-9.6/bin/initdb 
-  when: db_dir is defined and db_dir.stdout != ""
-  when: not ansible_check_mode 
+  when: 
+    - not ansible_check_mode 
+    - db_dir is defined 
+    - db_dir.stdout != ""
