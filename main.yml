@@ -1,0 +1,7 @@
+---
+- hosts: jira
+  become: Yes
+  gather_facts: Yes
+  roles:
+    - jira_user
+    - boostrap_jira
