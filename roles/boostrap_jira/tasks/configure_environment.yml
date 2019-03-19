@@ -12,7 +12,7 @@
 
 - name: See java JAVA_HOME
   debug:
-    msg: "java_home_result"
+    msg: "{{java_home_result}}"
 
 - name: Configure JAVA_HOME
   template:
