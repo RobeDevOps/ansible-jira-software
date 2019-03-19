@@ -6,8 +6,8 @@
     mode: 0700
     state: directory
   with_items:
-    - "{{jira_installation}}"
-    - "{{jira_home}}"
+    - "{{jira_install_dir}}"
+    - "{{jira_home_dir}}"
 
 - name: Download atlassian-jira-software-{{version}}.tar.gz
   get_url:
@@ -22,13 +22,13 @@
   when: jira_archive.changed
   ignore_errors: yes
 
-- name: Copying download files into {{jira_installation}}
-  shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
+- name: Copying download files into {{jira_install_dir}}
+  shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_install_dir}}
   when: jira_archive.changed
 
-- name: Set right permission to {{jira_installation}}
+- name: Set right permission to {{jira_install_dir}}
   file:
-    path: "{{jira_installation}}"
+    path: "{{jira_install_dir}}"
     owner: "{{jira_user}}"
     group: "{{jira_user}}"
     state: directory

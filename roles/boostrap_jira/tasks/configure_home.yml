@@ -2,5 +2,5 @@
 - name: Configure Jira home directory
   template:
     src: jira-application.properties.j2
-    dest: "{{jira_installation}}/atlassian-jira/WEB-INF/classes/jira-application.properties"
+    dest: "{{jira_install_dir}}/atlassian-jira/WEB-INF/classes/jira-application.properties"
 #   notify: jira service

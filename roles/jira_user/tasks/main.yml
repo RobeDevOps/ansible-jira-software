@@ -1,7 +1,7 @@
 ---
-- name: Create jira user
+- name: Create new {{jira_user}}
   user:
-    name: jira
+    name: "{{jira_user}}"
     comment: Dedicated user to run just jira service
     create_home: yes
     shell: /bin/bash
