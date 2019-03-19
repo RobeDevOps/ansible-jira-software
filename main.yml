@@ -3,5 +3,6 @@
   become: Yes
   gather_facts: Yes
   roles:
+    - apt_packages
     - jira_user
     - boostrap_jira

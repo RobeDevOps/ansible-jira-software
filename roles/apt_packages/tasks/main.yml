@@ -1,0 +1,7 @@
+---
+- name: Install Java
+  apt:
+    name: default-jre
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
