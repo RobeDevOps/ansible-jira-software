@@ -16,6 +16,9 @@
     ls /var/lib/pgsql/9.6/data/
   register: db_dir
 
+- name: See data dir
+  debug: msg="db_dir"
+
 - name: Init postgresql
   shell: >
     /usr/pgsql-9.6/bin/initdb 
