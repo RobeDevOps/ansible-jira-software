@@ -3,3 +3,6 @@ version: 8.0.2
 jira_installation: /opt/atlassian/jira
 jira_home_data: /var/atlassian/jira
 jira_user: jira
+
+jira_server_port: 8005
+jira_connector_port: 8080

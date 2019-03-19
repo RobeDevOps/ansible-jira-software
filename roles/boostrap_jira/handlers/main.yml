@@ -1,0 +1,6 @@
+---
+- name: Restart JIRA service
+  systemd:
+    name: jira
+    state: restarted
+    daemon_reload: yes

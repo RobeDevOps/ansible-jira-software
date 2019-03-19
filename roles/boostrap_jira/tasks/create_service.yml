@@ -1,0 +1,12 @@
+---
+- name: Create systemd service
+  template:
+    src: jira.service.j2
+    dest: /lib/systemd/system/jira.service
+  notify: Restart JIRA service
+
+- name: Start JIRA service
+  systemd:
+    name: jira
+    state: started
+    enabled: yes

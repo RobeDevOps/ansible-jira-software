@@ -1,34 +1,4 @@
 ---
-- name: Create JIRA directories
-  file: 
-    path: "{{item}}"
-    owner: "{{jira_user}}"
-    state: directory
-  with_items:
-    - "{{jira_installation}}"
-    - "{{jira_home_data}}"
-
-- name: Download atlassian-jira-software-{{version}}.tar.gz
-  get_url:
-    url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}.tar.gz
-    dest: "/tmp/atlassian-jira-software-{{version}}.tar.gz"
-  register: jira_archive
-
-- name: Unpackage atlassian-jira-software-{{version}}.tar.gz
-  unarchive:
-    src: /tmp/atlassian-jira-software-{{version}}.tar.gz
-    dest: /tmp
-  when: jira_archive.changed
-  ignore_errors: yes
-
-- name: Copying download files into {{jira_installation}}
-  shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
-  when: jira_archive.changed
-
-- name: Set right permission to {{jira_installation}}
-  file:
-    path: "{{jira_installation}}"
-    owner: "{{jira_user}}"
-    group: "{{jira_user}}"
-    state: directory
-    recurse: yes
+- import_tasks: download_and_install.yml
+- import_tasks: configure_home.yml
+- import_tasks: configure_server.yml
