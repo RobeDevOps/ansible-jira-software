@@ -1,12 +1,9 @@
 ---
 - name: Install package rpm postgresql
   yum:
-    name: http://download.postgresql.org/pub/repos/yum/{{postgres_version}}/{{postgres_platform}}/{{platform_arch}}/{{rpm_package}}
+    name: 
     state: present
     update_cache: yes
-
-- name: Install package[{{postgres_package}}]
-  yum:
-    name: "{{postgres_package}}"
-    state: present
-    update_cache: yes
+  with_items:
+    - "http://download.postgresql.org/pub/repos/yum/{{postgres_version}}/{{postgres_platform}}/{{platform_arch}}/{{rpm_package}}"
+    - "{{postgres_package}}"
