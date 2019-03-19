@@ -1,8 +1,0 @@
----
-postgres_version: 9.6
-postgres_platform: redhat
-platform_arch: rhel-7-x86_64
-rpm_package: pgdg-centos96-9.6-3.noarch.rpm
-
-jira_db_name: jiradb
-jira_db_user: jirauser
