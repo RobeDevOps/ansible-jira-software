@@ -1,0 +1,21 @@
+---
+- name: Create database {{jira_db_name}}
+  become_user: postgres
+  postgresql_db:
+    name: "{{jira_db_name}}"
+    encoding: UTF-8
+    template: template0
+
+- name: Create postgres user[{{jira_db_user}}]
+    become_user: postgres
+    postgresql_user:
+      name: "{{jira_db_user}}"
+      password: "{{jira_db_passwd}}"
+
+  - name: Ensure access for user[{{jira_db_user}}]
+    become_user: postgres
+    postgresql_privs:
+      db: "{{jira_db_name}}"
+      role: "{{jira_db_user}}"
+      objs: ALL_IN_SCHEMA
+      privs: SELECT,INSERT,UPDATE,DELETE,CONNECT
