@@ -7,10 +7,10 @@
     template: template0
 
 - name: Create postgres user[{{jira_db_user}}]
-    become_user: postgres
-    postgresql_user:
-      name: "{{jira_db_user}}"
-      password: "{{jira_db_passwd}}"
+  become_user: postgres
+  postgresql_user:
+    name: "{{jira_db_user}}"
+    password: "{{jira_db_passwd}}"
 
   - name: Ensure access for user[{{jira_db_user}}]
     become_user: postgres
