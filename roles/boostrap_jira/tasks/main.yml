@@ -1,5 +1,4 @@
 ---
 - import_tasks: download_and_install.yml
-- import_tasks: configure_home.yml
-- import_tasks: configure_server.yml
+- import_tasks: configure_environment.yml
 - import_tasks: create_service.yml

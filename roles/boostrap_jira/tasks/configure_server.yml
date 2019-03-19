@@ -1,6 +1,0 @@
----
-- name: Configure Jira server.xml
-  template:
-    src: server.xml.j2
-    dest: "{{jira_install_dir}}/conf/server.xml"
-  notify: Restart JIRA service
