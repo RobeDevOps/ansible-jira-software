@@ -24,3 +24,8 @@
     - db_dir is defined 
     - db_dir.stdout == ""
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Install psycopg2
+  yum:
+    name: psycopg2
+    state: present
