@@ -23,4 +23,5 @@
 
 - name: Copying download files into {{jira_installation}}
   shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_installation}}
+  owner: "{{jira_user}}"
   when: jira_archive.changed
