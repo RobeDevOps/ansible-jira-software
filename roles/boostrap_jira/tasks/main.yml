@@ -30,3 +30,4 @@
     path: "{{jira_installation}}"
     owner: "{{jira_user}}"
     state: directory
+    recurse: yes
