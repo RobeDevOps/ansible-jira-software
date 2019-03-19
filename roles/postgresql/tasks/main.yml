@@ -17,6 +17,7 @@
   register: db_dir
 
 - name: Init postgresql
+  become_user: postgresql
   shell: >
     /usr/pgsql-9.6/bin/initdb -D /var/lib/pgsql/9.6/data/
   when: 
