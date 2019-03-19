@@ -11,5 +11,5 @@
   become: Yes
   gather_facts: Yes
   roles:
-    - { role: posgtresql, tags: ['psql'] }
+    - { role: postgresql, tags: ['psql'] }
   
