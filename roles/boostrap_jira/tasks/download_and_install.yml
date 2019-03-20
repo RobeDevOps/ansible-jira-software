@@ -21,7 +21,7 @@
     dest: /tmp
   ignore_errors: yes
 
-- name: Copying download files into {{jira_install_dir}}
+- name: Copying downloaded files into {{jira_install_dir}}
   shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_install_dir}}
   args:
     creates: "{{jira_install_dir}}/jira-{{version}}"
