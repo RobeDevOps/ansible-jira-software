@@ -29,8 +29,10 @@
   yum: 
     name: python-pip
     state: present
+  register: pip_install
 
 - name: Install psycopg2
   pip:
     name: psycopg2
     state: present
+  when: not pip_install.changed
