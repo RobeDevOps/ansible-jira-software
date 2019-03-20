@@ -2,8 +2,8 @@
 - name: Configuring postgres files
   become_user: postgres
   template:
-    src: "{{item}}}.conf.j2"
-    dest: "/var/lib/pgsql/9.6/data/{{item}}}.conf"
+    src: "{{item}}.conf.j2"
+    dest: "/var/lib/pgsql/9.6/data/{{item}}.conf"
   with_items:
     - pg_hba
     - postgresql
