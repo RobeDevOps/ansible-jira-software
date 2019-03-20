@@ -24,7 +24,7 @@
 - name: Copying downloaded files into {{jira_install_dir}}
   shell: mv /tmp/atlassian-jira-software-{{version}}-standalone/* {{jira_install_dir}}
   args:
-    creates: "{{jira_install_dir}}/jira.{{version}}"
+    creates: "{{jira_install_dir}}/jira.installed"
 
 - name: Set right permission to {{jira_install_dir}}
   file:
