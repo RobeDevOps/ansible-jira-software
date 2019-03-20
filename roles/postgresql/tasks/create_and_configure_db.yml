@@ -26,7 +26,7 @@
     name: "{{jira_db_name}}"
     encoding: UTF-8
     template: template0
-  when: psycopg2_install is changed|success
+  when: psycopg2_install is changed or psycopg2_install is success
 
 - name: Create postgres user[{{jira_db_user}}]
   become_user: postgres
