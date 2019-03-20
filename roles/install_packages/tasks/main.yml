@@ -8,6 +8,9 @@
     update_cache: yes    
   register: yum_packages_install
 
+- name: See package_install
+  debug: msg="{{yum_packages_install}}"
+
 - name: Install python module
   pip:
     name: psycopg2
