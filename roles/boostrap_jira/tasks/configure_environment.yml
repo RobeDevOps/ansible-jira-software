@@ -18,7 +18,10 @@
     src: setenv.sh.j2
     dest: "{{jira_install_dir}}/bin/setenv.sh"
   notify: Restart JIRA service
-  when: system_java_home is defined and system_java_home.stdout != ""
+  when: 
+    - system_java_home is not skipped
+    - system_java_home is defined
+    - system_java_home.stdout != ""
 
 - name: Configure Jira server.xml
   template:
