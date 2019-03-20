@@ -15,4 +15,4 @@
   pip:
     name: psycopg2
     state: latest
-  when: yum_packages is success
+  when: python-pip in yum_packages_install.changes.installed
