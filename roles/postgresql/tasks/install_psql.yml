@@ -28,6 +28,7 @@
 - name: install python pip
   yum: 
     name: python-pip
+    state: present
 
 - name: Install psycopg2
   pip:
