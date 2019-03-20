@@ -5,13 +5,6 @@
     state: present
   register: pip_install
 
-- name: Install psycopg2
-  pip:
-    name: psycopg2
-    state: present
-  register: psycopg2_install
-  when: not pip_install.changed
-
 - name: Create database[{{jira_db_name}}]
   become_user: postgres
   postgresql_db:

@@ -1,6 +1,16 @@
 ---
 - name: Install Java
   yum:
-    name: java-1.8.0-openjdk-devel
+    name: "{{item}}"
     state: latest
     update_cache: yes
+  with_items:
+    - java-1.8.0-openjdk-devel
+    - python-pip 
+  register: yum_packages_install
+
+- name: Install python module
+  pip:
+    name: psycopg2
+    state: latest
+  when: yum_packages is success
