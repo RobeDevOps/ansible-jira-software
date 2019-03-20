@@ -10,8 +10,10 @@
   become_user: postgres
   postgresql_db:
     name: "{{jira_db_name}}"
-    encoding: UTF-8
-    template: template0
+    encoding: 'UTF-8'
+    lc_collate: 'en_US.UTF-8'
+    lc_ctype: 'en_US.UTF-8'
+    template: 'template0'
   when: 
     - psycopg2_install is success
     - not ansible_check_mode
@@ -19,6 +21,7 @@
 - name: Create postgres user[{{jira_db_user}}]
   become_user: postgres
   postgresql_user:
+    db: "{{jira_db_name}}"
     name: "{{jira_db_user}}"
     password: "{{jira_db_passwd}}"
   when: 
