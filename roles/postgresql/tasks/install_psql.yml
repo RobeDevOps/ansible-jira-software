@@ -25,6 +25,10 @@
     - db_dir.stdout == ""
   ignore_errors: "{{ ansible_check_mode }}"
 
+- name: install python pip
+  yum: 
+    name: python-pip
+
 - name: Install psycopg2
   pip:
     name: psycopg2
