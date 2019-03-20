@@ -15,4 +15,6 @@
   pip:
     name: psycopg2
     state: latest
-  when: python-pip in yum_packages_install.changes.installed
+  when: yum_packages_install is success
+  ignore_errors: "{{ ansible_check_mode }}"
+    
