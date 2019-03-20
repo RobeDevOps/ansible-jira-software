@@ -9,14 +9,13 @@
     name: "{{postgres_package}}"
     state: present
     update_cache: yes
-  register: package_install
 
 - name: Check if data directory is not empty
   become_user: postgres
   shell: ls /var/lib/pgsql/{{postgres_version}}/data/
   register: db_dir
 
-- name: Init postgresql
+- name: Init postgresql if data directory is empty
   become_user: postgres
   shell: >
     "/usr/pgsql-{{postgres_version}}/bin/initdb -D /var/lib/pgsql/{{postgres_version}}/data/"
