@@ -19,7 +19,6 @@
   unarchive:
     src: /tmp/atlassian-jira-software-{{version}}.tar.gz
     dest: /tmp
-  when: jira_archive.changed
   ignore_errors: yes
 
 - name: Copying download files into {{jira_install_dir}}
