@@ -1,20 +1,7 @@
 ---
 - name: Install Java
   yum:
-    name: 
-      - java-1.8.0-openjdk-devel
-      - python-pip 
+    name: java-1.8.0-openjdk-devel
     state: present
-    update_cache: yes    
-  register: yum_packages_install
-
-- name: See package_install
-  debug: msg="{{yum_packages_install}}"
-
-- name: Install python module
-  pip:
-    name: psycopg2
-    state: latest
-  when: yum_packages_install is success
-  ignore_errors: "{{ ansible_check_mode }}"
+    update_cache: yes
     

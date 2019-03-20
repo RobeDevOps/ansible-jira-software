@@ -1,9 +1,18 @@
 ---
-- name: install python pip
-  yum: 
-    name: python-pip
+- name: Install pip
+  yum:
+    name: python-pip 
     state: present
+    update_cache: yes    
   register: pip_install
+
+- name: Install python module psycopg2 using pip
+  pip:
+    name: psycopg2
+    state: latest
+  register: psycopg2_install
+  when: pip_install is (success|changed)
+  ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Create database[{{jira_db_name}}]
   become_user: postgres
@@ -11,7 +20,7 @@
     name: "{{jira_db_name}}"
     encoding: UTF-8
     template: template0
-  when: psycopg2_install|success
+  when: psycopg2_install is (success|changed)
 
 - name: Create postgres user[{{jira_db_user}}]
   become_user: postgres
