@@ -11,7 +11,7 @@
     name: psycopg2
     state: latest
   register: psycopg2_install
-    when: pip_install is success
+  when: pip_install is success
 
 - name: Create database[{{jira_db_name}}]
   become_user: postgres
