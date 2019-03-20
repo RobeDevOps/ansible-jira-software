@@ -24,15 +24,3 @@
     - db_dir is defined 
     - db_dir.stdout == ""
   ignore_errors: "{{ ansible_check_mode }}"
-
-- name: install python pip
-  yum: 
-    name: python-pip
-    state: present
-  register: pip_install
-
-- name: Install psycopg2
-  pip:
-    name: psycopg2
-    state: present
-  when: not pip_install.changed
