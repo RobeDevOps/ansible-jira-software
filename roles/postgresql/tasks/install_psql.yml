@@ -18,7 +18,7 @@
 - name: Init postgresql if data directory is empty
   become_user: postgres
   shell: >
-    usr/pgsql-{{postgres_version}}/bin/initdb -D /var/lib/pgsql/{{postgres_version}}/data
+    /usr/pgsql-{{postgres_version}}/bin/initdb -D /var/lib/pgsql/{{postgres_version}}/data
   when: 
     - db_dir is not skipped
     - db_dir is defined 
