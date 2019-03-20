@@ -21,6 +21,7 @@
   shell: >
     "/usr/pgsql-{{postgres_version}}/bin/initdb -D /var/lib/pgsql/{{postgres_version}}/data/"
   when: 
+    - db_dir is not skipped
     - db_dir is defined 
     - db_dir.stdout == ""
-  ignore_errors: "{{ ansible_check_mode }}"
+  # ignore_errors: "{{ ansible_check_mode }}"
