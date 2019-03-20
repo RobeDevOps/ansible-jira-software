@@ -34,7 +34,7 @@
     db: "{{jira_db_name}}"
     role: "{{jira_db_user}}"
     objs: ALL_IN_SCHEMA
-    privs: SELECT,INSERT,UPDATE,DELETE,CONNECT
+    privs: SELECT,INSERT,UPDATE,DELETE
   when: 
     - psycopg2_install is success
     - not ansible_check_mode
