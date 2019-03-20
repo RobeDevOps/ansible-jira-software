@@ -33,7 +33,7 @@
   postgresql_user:
     name: "{{jira_db_user}}"
     password: "{{jira_db_passwd}}"
-  when: psycopg2_install is success or psycopg2_install is not skipped
+  when: psycopg2_install is not changed
 
 - name: Ensure access for user[{{jira_db_user}}]
   become_user: postgres
@@ -42,4 +42,4 @@
     role: "{{jira_db_user}}"
     objs: ALL_IN_SCHEMA
     privs: SELECT,INSERT,UPDATE,DELETE,CONNECT
-  when: psycopg2_install is success or psycopg2_install is not skipped
+  when: psycopg2_install is not changed
