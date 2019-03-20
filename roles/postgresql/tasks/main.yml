@@ -1,3 +1,4 @@
 ---
 - import_tasks: install_psql.yml
+- import_tasks: postgres_files_configuration.yml
 - import_tasks: create_and_configure_db.yml

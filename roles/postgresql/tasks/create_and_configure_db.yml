@@ -1,18 +1,4 @@
 ---
-# - name: Install pip
-#   yum:
-#     name: python-pip 
-#     state: present
-#     update_cache: yes    
-#   register: pip_install
-
-# - name: Install python module psycopg2 using pip
-#   pip:
-#     name: psycopg2
-#     state: latest
-#   register: psycopg2_install
-#   when: pip_install is not changed
-
 - name: Install python-psycopg2
   yum:
     name: python-psycopg2

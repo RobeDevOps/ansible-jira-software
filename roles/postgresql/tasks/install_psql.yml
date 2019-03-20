@@ -11,7 +11,7 @@
     update_cache: yes
   register: package_install
 
-- name: Check if initdb is not empty
+- name: Check if data directory is not empty
   become_user: postgres
   shell: ls /var/lib/pgsql/{{postgres_version}}/data/
   register: db_dir
@@ -25,3 +25,5 @@
     - db_dir is defined 
     - db_dir.stdout == ""
   # ignore_errors: "{{ ansible_check_mode }}"
+
+  
