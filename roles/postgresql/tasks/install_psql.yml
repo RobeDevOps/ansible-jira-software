@@ -12,6 +12,7 @@
   register: package_install
 
 - name: Check if initdb is not empty
+  become_user: postgres
   shell: >
     "ls /var/lib/pgsql/{{postgres_version}}/data/"
   register: db_dir
