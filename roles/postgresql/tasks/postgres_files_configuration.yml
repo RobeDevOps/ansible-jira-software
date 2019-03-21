@@ -1,4 +1,9 @@
 ---
+- name: Stop postgresql
+  systemd: 
+    name: "postgresql-{{postgres_version}}"
+    state: stopped
+
 - name: Configuring postgres files
   become_user: postgres
   template:
