@@ -1,6 +1,6 @@
 ---
-- import_tasks: create_jira_user
-- import_tasks: create_jira_directories
-- import_tasks: unattended_installation
-- import_tasks: ensure_jira_owner
-- import_tasks: create_jira_service
+- import_tasks: create_jira_user.yml
+- import_tasks: create_jira_directories.yml
+- import_tasks: unattended_installation.yml
+- import_tasks: ensure_jira_owner.yml
+- import_tasks: create_jira_service.yml
