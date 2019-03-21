@@ -8,7 +8,7 @@
 - name: Create systemd service
   template:
     src: jira.service.j2
-    dest: /lib/systemd/system/jira.service
+    dest: /usr/lib/systemd/system/jira.service
     owner: "{{jira_user}}"
   notify: Restart JIRA service
 
