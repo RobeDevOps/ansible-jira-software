@@ -9,7 +9,6 @@
 - name: Create unattended install directory "{{jira_install_dir}}/.install4j
   file: 
     path: "{{jira_install_dir}}/.install4j"
-    mode: 0700
     state: directory
 
 - name: Copy response.varfile to "{{jira_install_dir}}/.install4j
