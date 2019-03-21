@@ -10,4 +10,4 @@
   template:
     src: user.sh.j2
     dest: "{{jira_install_dir}}/bin/user.sh"
-    owner: "{{jira_user}}
+    owner: "{{jira_user}}"
