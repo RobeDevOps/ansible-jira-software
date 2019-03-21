@@ -1,15 +1,15 @@
 ---
-- name: Create systemd service
-  template:
-    src: jira.service.j2
-    dest: /lib/systemd/system/jira.service
-  notify: Restart JIRA service
-
 - name: Enable Jira user to run jira service
   template:
     src: user.sh.j2
     dest: "{{jira_install_dir}}/bin/user.sh"
     owner: "{{jira_user}}"
+    
+- name: Create systemd service
+  template:
+    src: jira.service.j2
+    dest: /lib/systemd/system/jira.service
+  notify: Restart JIRA service
 
 - name: Start JIRA service
   systemd:
