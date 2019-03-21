@@ -22,3 +22,4 @@
     ./atlassian-jira-software-{{version}}-x64.bin -q -varfile {{jira_install_dir}}/.install4j/response.varfile
   args:
     chdir: /tmp
+    creates: "{{jira_install_dir}}/.install4j/installation.id"
