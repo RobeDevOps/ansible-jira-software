@@ -1,0 +1,26 @@
+---
+- name: Download atlassian intaller atlassian-jira-software-{{version}}-x64.bin
+  get_url:
+    url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}-x64.bin
+    dest: "/tmp/atlassian-jira-software-{{version}}-x64.bin"
+    chmod: 0555
+  register: jira_binary
+
+- name: Create unattended install directory "{{jira_install_dir}}/.install4j
+  file: 
+    path: "{{jira_install_dir}}/.install4j"
+    owner: "{{jira_user}}"
+    mode: 0700
+    state: directory
+
+- name: Copy response.varfile to "{{jira_install_dir}}/.install4j
+  template:
+    src: response.varfile.j2
+    dest: "{{jira_install_dir}}/.install4j"
+
+- name: Start install as Unattended mode
+  # https://confluence.atlassian.com/adminjiraserver071/unattended-installation-855475683.html?_ga=2.40096363.817173845.1552928648-887595188.1549059064 
+  shell: >
+    ./atlassian-jira-software-{{version}}-x64.bin -q -varfile {{jira_install_dir}}/.install4j/response.varfile
+  args:
+    chdir: /tmp

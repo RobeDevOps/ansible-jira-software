@@ -1,0 +1,8 @@
+---
+- name: Set right permission to {{jira_install_dir}}
+  file:
+    path: "{{jira_install_dir}}"
+    owner: "{{jira_user}}"
+    group: "{{jira_user}}"
+    state: directory
+    recurse: yes

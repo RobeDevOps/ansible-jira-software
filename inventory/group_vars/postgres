@@ -10,4 +10,3 @@ jira_db_user: jirauser
 jira_db_passwd: J1r4P4ssw0rd
 jira_db_host: 127.0.0.1
 jira_db_port: 5432
-jira_install_dir: /opt/atlassian/jira
