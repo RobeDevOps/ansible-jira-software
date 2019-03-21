@@ -3,12 +3,8 @@
   get_url:
     url: https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{version}}-x64.bin
     dest: "/tmp/atlassian-jira-software-{{version}}-x64.bin"
+    mode: 0555
   register: jira_binary
-
-- name: Make the installer executable
-  file:
-    path: "/tmp/atlassian-jira-software-{{version}}-x64.bin"
-    chmod: 0555
 
 - name: Create unattended install directory "{{jira_install_dir}}/.install4j
   file: 
