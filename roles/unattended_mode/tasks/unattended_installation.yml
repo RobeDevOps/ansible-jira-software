@@ -14,7 +14,7 @@
 - name: Copy response.varfile to "{{jira_install_dir}}/.install4j
   template:
     src: response.varfile.j2
-    dest: "{{jira_install_dir}}/.install4j"
+    dest: "{{jira_install_dir}}/.install4j/response.varfile"
 
 - name: Start install as Unattended mode
   # https://confluence.atlassian.com/adminjiraserver071/unattended-installation-855475683.html?_ga=2.40096363.817173845.1552928648-887595188.1549059064 
