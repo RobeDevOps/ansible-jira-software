@@ -1,4 +1,5 @@
 ---
+
 - name: Select Application Title property
   postgresql_query:
     db: "{{jira_db_name}}"
