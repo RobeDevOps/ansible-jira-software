@@ -13,7 +13,7 @@
   notify: Restart JIRA service
 
 - name: Reload systemd daemon
-  meta: Restart JIRA service
+  meta: flush_handlers
 
 - name: Start JIRA service
   systemd:
