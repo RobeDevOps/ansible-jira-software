@@ -16,4 +16,4 @@
 - hosts: postgres
   gather_facts: Yes
   roles:
-    - jira_setup
+    - { role: jira_setup, tags: ['setup']}
