@@ -12,3 +12,8 @@
   roles:
     - user
     - unattended_mode
+
+- hosts: postgres
+  gather_facts: Yes
+  roles:
+    - jira_setup
