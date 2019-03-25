@@ -1,15 +1,7 @@
 ---
-- name: Simple select query to acme db
-  postgresql_query:
-    db: jiradb
-    query: SELECT version()
+- name: select application title id
+  shell: >
+    "psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c "select PE.id from propertyentry PE join propertystring PS on PE.id=PS.id where PE.property_key = 'jira.baseurl';
+  register: app_title_row_id
 
-# - name: Select Application Title property
-#   postgresql_query:
-#     db: "{{jira_db_name}}"
-  #   login_user: "{{jira_db_user}}"
-  #   login_password: "{{jira_db_passwd}}"
-  #   query: select PS.id from propertyentry PE join propertystring PS on PE.id=PS.id where PE.property_key = 'jira.title';
-  # register: app_title_result
-
-# - debug: msg="{{app_title_result}}"
+- debug: msg="{{app_title_row_id}}"
