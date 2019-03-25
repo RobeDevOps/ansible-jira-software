@@ -3,6 +3,9 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.title'\";"
   register: app_title_select_query
+  retries: 3
+  delay: 10
+  until: app_title_select_query.rc == 0
   tags: 
     - setup
 
@@ -32,6 +35,9 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.baseurl'\";"
   register: base_url_select_query
+  retries: 3
+  delay: 10
+  until: base_url_select_query.rc == 0
   tags: 
     - setup
 
