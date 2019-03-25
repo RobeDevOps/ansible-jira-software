@@ -4,5 +4,6 @@
     path: "{{jira_install_dir}}"
     owner: "{{jira_user}}"
     group: "{{jira_user}}"
+    mode: 0700
     state: directory
     recurse: yes

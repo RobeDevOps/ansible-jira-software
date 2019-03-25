@@ -3,7 +3,6 @@
   file: 
     path: "{{item}}"
     owner: "{{jira_user}}"
-    mode: 0700
     state: directory
   with_items:
     - "{{jira_install_dir}}"

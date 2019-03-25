@@ -1,14 +1,14 @@
 ---
-- name: Create JIRA install directory["{{jira_install_dir}}"]
+- name: Create JIRA install directory["{{jira_home_dir}}"]
   file: 
     path: "{{item}}"
     owner: "{{jira_user}}"
     mode: 0700
     state: directory
   with_items:
-    - "{{jira_install_dir}}"
+    - "{{jira_home_dir}}"
 
 - name: Create dbconfig
   template:
     src: dbconfig.xml.j2
-    dest: "{{jira_install_dir}}/dbconfig.xml"
+    dest: "{{jira_home_dir}}/dbconfig.xml"
