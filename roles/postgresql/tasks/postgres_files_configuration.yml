@@ -1,12 +1,10 @@
 ---
 - name: Stop postgresql
-  become_user: postgres
   systemd: 
     name: "postgresql-{{postgres_version}}"
     state: stopped
 
 - name: Configuring postgres files
-  become_user: postgres
   template:
     src: "{{item}}.conf.j2"
     dest: "/var/lib/pgsql/9.6/data/{{item}}.conf"
@@ -16,7 +14,7 @@
   notify: Reboot postgresql
 
 - name: Start postgresql
-  become_user: postgres
+  become: yes
   systemd: 
     name: "postgresql-{{postgres_version}}"
     state: started

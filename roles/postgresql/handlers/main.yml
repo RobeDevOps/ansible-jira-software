@@ -1,6 +1,6 @@
 ---
 - name: Reboot postgresql
-  become_user: postgres
+  become: yes
   systemd:
     name: "postgresql-{{postgres_version}}"
     state: restarted
