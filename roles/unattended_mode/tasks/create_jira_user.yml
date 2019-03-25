@@ -1,5 +1,0 @@
----
-- name: Set user to user.sh file
-  template:
-    src: user.sh.j2
-    dest: "{{jira_install_dir}}/bin/user.sh"
