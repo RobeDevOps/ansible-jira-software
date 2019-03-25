@@ -12,9 +12,3 @@
   roles:
     - user
     - unattended_mode
-
-- hosts: postgres
-  gather_facts: Yes
-  become: yes
-  roles:
-    - { role: jira_setup, tags: ['setup'] }
