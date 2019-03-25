@@ -4,7 +4,7 @@
     name: http://download.postgresql.org/pub/repos/yum/{{postgres_version}}/{{postgres_platform}}/{{platform_arch}}/{{rpm_package}}
     state: present
 
-- name: Install package[{{postgres_package}}]
+- name: Install package [{{postgres_package}}]
   yum:
     name: "{{postgres_package}}"
     state: present

@@ -1,5 +1,6 @@
 ---
 - name: Stop postgresql
+  become_user: postgres
   systemd: 
     name: "postgresql-{{postgres_version}}"
     state: stopped
@@ -15,6 +16,7 @@
   notify: Reboot postgresql
 
 - name: Start postgresql
+  become_user: postgres
   systemd: 
     name: "postgresql-{{postgres_version}}"
     state: started
