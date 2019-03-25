@@ -1,7 +1,10 @@
 ---
-- name: select application title id
+- name: select Application Title id
   become_user: postgres
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"select PE.id from propertyentry PE join propertystring PS on PE.id=PS.id where PE.property_key = 'jira.baseurl'\";"
-  register: app_title_row_id
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.title'\";"
+  register: app_title_select
 
-- debug: msg="{{app_title_row_id}}"
+- name: Update Application Title by id
+  become_user: postgres
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = {{jira_app_title}} WHERE id = {{app_title_select.stdout}}\";"
+  register: app_title_update
