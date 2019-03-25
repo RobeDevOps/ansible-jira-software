@@ -1,7 +1,7 @@
 ---
 - name: select application title id
   become_user: postgres
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql --help"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"select PE.id from propertyentry PE join propertystring PS on PE.id=PS.id where PE.property_key = 'jira.baseurl'\";"
   register: app_title_row_id
 
 - debug: msg="{{app_title_row_id}}"
