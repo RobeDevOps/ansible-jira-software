@@ -1,12 +1,12 @@
 ---
-- hosts: jira
-  become: Yes
-  gather_facts: Yes
-  roles:
-    - unattended_mode
-
 - hosts: postgres
   become: Yes
   gather_facts: Yes
   roles:
     - { role: postgresql, tags: ['psql'] }
+    
+- hosts: jira
+  become: Yes
+  gather_facts: Yes
+  roles:
+    - unattended_mode
