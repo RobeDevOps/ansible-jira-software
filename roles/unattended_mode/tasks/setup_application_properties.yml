@@ -8,14 +8,22 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_app_title}}' WHERE id = {{app_title_select_query.stdout}}\";"
   register: app_title_update
-  when: app_title_select_query.stdout != ""
+  when: app_title_select_query.stdout != ''
+
+- name: Insert Application Title
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(propertyvalue) VALUES ('{{jira_app_title}}'')\";"
+  register: insert_app_title
+  when: app_title_select_query == ''
+
+- debug: msg="{{insert_app_title}}"
 
 - name: select Base Url id
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.baseurl'\";"
-  register: base_url_select
+  register: base_url_select_query
 
 - name: Update Base Url
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_base_url}}' WHERE id = {{base_url_select.stdout}}\";"
-  register: app_title_update
+  register: base_url_update
+  when: base_url_select_query.stdout  != ''
