@@ -1,11 +1,4 @@
 ---
-- name: Create new user [{{jira_user}}]
-  user:
-    name: "{{jira_user}}"
-    comment: Dedicated user to run just jira service
-    create_home: yes
-    shell: /bin/bash
-
 - name: Set user to user.sh file
   template:
     src: user.sh.j2

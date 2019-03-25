@@ -3,10 +3,12 @@
   become: Yes
   gather_facts: Yes
   roles:
+    - user
     - { role: postgresql, tags: ['psql'] }
     
 - hosts: jira
   become: Yes
   gather_facts: Yes
   roles:
+    - user
     - unattended_mode
