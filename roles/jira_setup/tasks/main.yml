@@ -6,5 +6,5 @@
 
 - name: Update Application Title by id
   become_user: postgres
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = {{jira_app_title}} WHERE id = {{app_title_select.stdout}}\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_app_title}}' WHERE id = {{app_title_select.stdout}}\";"
   register: app_title_update
