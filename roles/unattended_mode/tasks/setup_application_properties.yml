@@ -20,7 +20,7 @@
     - setup
 
 - name: Insert Application Title
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(propertyvalue) VALUES ('{{jira_app_title}}'')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(propertyvalue) VALUES ('{{jira_app_title}}')\";"
   register: insert_app_title
   when: app_title_select_query.stdout == ""
   tags:
