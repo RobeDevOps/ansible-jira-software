@@ -4,7 +4,7 @@
     path: "{{item}}"
     owner: "{{jira_user}}"
     group: "{{jira_user}}"
-    mode: 0700
+    mode: 0744
     state: directory
     recurse: yes
   with_items:
