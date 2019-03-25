@@ -1,5 +1,5 @@
 ---
-- name: Set right permission to {{jira_install_dir}}
+- name: Set right permission to JIRA directories
   file:
     path: "{{item}}"
     owner: "{{jira_user}}"

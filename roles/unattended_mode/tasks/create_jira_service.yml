@@ -1,5 +1,5 @@
 ---
-- name: Enable Jira user to run jira service
+- name: Set JIRA user to run jira service
   template:
     src: user.sh.j2
     dest: "{{jira_install_dir}}/bin/user.sh"
@@ -11,6 +11,9 @@
     dest: /usr/lib/systemd/system/jira.service
     owner: "{{jira_user}}"
   notify: Restart JIRA service
+
+- name: Reload systemd daemon
+  meta: Restart JIRA service
 
 - name: Start JIRA service
   systemd:
