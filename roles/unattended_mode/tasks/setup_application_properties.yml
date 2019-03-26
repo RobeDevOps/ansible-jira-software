@@ -43,7 +43,7 @@
 
 - name: Update Base Url
   become_user: postgres
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_base_url}}' WHERE id = {{base_url_select.stdout}}\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_base_url}}' WHERE id = {{base_url_select_query.stdout}}\";"
   register: base_url_update
   when: base_url_select_query.stdout != ""
   tags: 
