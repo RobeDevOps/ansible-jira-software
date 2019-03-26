@@ -1,6 +1,6 @@
 ---
 - name: Configure jira-config.properties
-  templates:
+  template:
     src: jira-config.properties.j2
     dest: "{{jira_home_dir}}/jira-config.properties"
     owner: "{{jira_user}}"
