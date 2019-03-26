@@ -3,6 +3,10 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.title'\";"
   register: app_title_select_query
+  retries: 3
+  delay: 5
+  until: app_title_select_query.rc == 0
+  ignore_erros: yes
   tags: 
     - setup
 
@@ -10,19 +14,27 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_app_title}}' WHERE id = {{app_title_select_query.stdout}}\";"
   register: app_title_update
-  when: app_title_select_query.stdout != ""
+  when: app_title_select_query is defined and app_title_select_query.stdout != ""
+  tags: 
+    - setup
+
+- name: Generate application title id
+  become_user: postgres
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT COUNT(*) propertyentry\";"
+  register: properties_count
+  when: app_title_select_query is defined and app_title_select_query.stdout != ""
   tags: 
     - setup
 
 - name: Insert Application Title property_key
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, property_key) VALUES (10100,'jira.title')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry({{properties_count + 10000}}, entity_name, property_key) VALUES (10100,'jira.properties','jira.title')\";"
   register: insert_app_title_key
-  when: app_title_select_query.stdout == ""
+  when: app_title_select_query is defined and app_title_select_query.stdout == ""
   tags:
     - setup
 
 - name: Insert Application Title propertyvalue
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10100, '{{jira_app_title}}')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring({{properties_count + 10000}}, propertyvalue) VALUES (10100, '{{jira_app_title}}')\";"
   register: insert_app_title
   when: app_title_select_query.stdout == "" and insert_app_title_key is success
   tags:
@@ -33,8 +45,9 @@
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.baseurl'\";"
   register: base_url_select_query
   retries: 3
-  delay: 10
+  delay: 5
   until: base_url_select_query.rc == 0
+  ignore_errors: yes
   tags: 
     - setup
 
