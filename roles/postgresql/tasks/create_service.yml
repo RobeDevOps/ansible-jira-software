@@ -1,0 +1,12 @@
+---
+- name: Create systemd service | postgresql-{{postgres_version}}
+  template:
+    src: "postgresql-{{postgres_version}}.service.j2"
+    dest: "/usr/lib/systemd/system/postgresql-{{postgres_version}}.service"
+  notify: restart posgresql service
+
+- name: Start postgresql service
+  systemd:
+    name: postgresql-{{posgtres_version}}
+    state: started
+    enabled: yes

@@ -1,0 +1,9 @@
+---
+- name: Configuring postgres files
+  template:
+    src: "{{item}}.conf.j2"
+    dest: "/var/lib/pgsql/{{postgres_version}}/data/{{item}}.conf"
+  with_items:
+    - pg_hba
+    - postgresql
+  notify: restart postgresql service
