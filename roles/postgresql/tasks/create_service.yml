@@ -7,6 +7,6 @@
 
 - name: Start postgresql service
   systemd:
-    name: postgresql-{{posgtres_version}}
+    name: postgresql-{{postgres_version}}
     state: started
     enabled: yes
