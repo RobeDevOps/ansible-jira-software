@@ -7,6 +7,7 @@
   delay: 5
   until: app_title_select_query.rc == 0
   ignore_errors: yes
+  when: not ansible_check_mode
   tags: 
     - setup
 
@@ -14,21 +15,30 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_app_title}}' WHERE id = {{app_title_select_query.stdout}}\";"
   register: app_title_update
-  when: app_title_select_query is defined and app_title_select_query.stdout != ""
+  when: 
+  - app_title_select_query is defined
+  - app_title_select_query.stdout != ""
+  - not ansible_check_mode
   tags: 
     - setup
 
 - name: Insert Application Title property_key
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES (10206,'jira.properties','jira.title')\";"
   register: insert_app_title_key
-  when: app_title_select_query is defined and app_title_select_query.stdout == ""
+  when: 
+    - app_title_select_query is defined
+    - app_title_select_query.stdout == ""
+    - not ansible_check_mode
   tags:
     - setup
 
 - name: Insert Application Title propertyvalue
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10206, '{{jira_app_title}}')\";"
   register: insert_app_title
-  when: app_title_select_query.stdout == "" and insert_app_title_key is success
+  when: 
+    - app_title_select_query.stdout == ""
+    - insert_app_title_key is success
+    - not ansible_check_mode
   tags:
     - setup
 
@@ -40,6 +50,7 @@
   delay: 5
   until: base_url_select_query.rc == 0
   ignore_errors: yes
+  when: not ansible_check_mode
   tags: 
     - setup
 
@@ -47,19 +58,26 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"UPDATE propertystring SET propertyvalue = '{{jira_base_url}}' WHERE id = {{base_url_select_query.stdout}}\";"
   register: base_url_update
-  when: base_url_select_query.stdout != ""
+  when: 
+    - base_url_select_query.stdout != ""
+    - not ansible_check_mode
   tags: 
     - setup
 
 - name: Insert Base Url property_key
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES (10213,'jira.properties','jira.baseurl')\";"
   register: insert_base_url_key
-  when: base_url_select_query.stdout == ""
+  when: 
+    - base_url_select_query.stdout == ""
+    - not ansible_check_mode
   tags:
     - setup
 
 - name: Insert Base Url propertyvalue
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10213, '{{jira_base_url}}')\";"
-  when: base_url_select_query.stdout == "" and insert_base_url_key is success
+  when: 
+    - base_url_select_query.stdout == ""
+    - insert_base_url_key is success
+    - not ansible_check_mode
   tags:
     - setup
