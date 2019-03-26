@@ -26,7 +26,7 @@
   tags: 
     - setup
 
-- debug: msg="{{properties_count}}"
+- debug: msg="{{properties_count.stdout|replace(" ","")}}"
   tags: 
     - setup
 
