@@ -20,9 +20,10 @@
   shell: >
     /usr/pgsql-{{postgres_version}}/bin/initdb -D /var/lib/pgsql/{{postgres_version}}/data
   when: 
+    - not ansible_check_mode
     - db_dir is not skipped
     - db_dir is defined 
     - db_dir.stdout == ""
-  when: not ansible_check_mode 
+
 
   
