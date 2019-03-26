@@ -22,7 +22,7 @@
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT COUNT(*) propertyentry\";"
   register: properties_count
-  when: app_title_select_query is defined and app_title_select_query.stdout != ""
+  when: app_title_select_query is defined and app_title_select_query.stdout == ""
   tags: 
     - setup
 
