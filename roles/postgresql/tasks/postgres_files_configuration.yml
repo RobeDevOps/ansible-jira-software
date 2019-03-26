@@ -8,6 +8,8 @@
     - postgresql
   notify: Reboot postgresql
 
+- meta: flush_handlers
+
 - name: Start postgresql
   become: yes
   systemd: 
