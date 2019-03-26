@@ -27,7 +27,7 @@
     - setup
 
 - name: Insert Application Title property_key
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry({{properties_count + 10000}}, entity_name, property_key) VALUES (10100,'jira.properties','jira.title')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES ({{properties_count + 10000}},'jira.properties','jira.title')\";"
   register: insert_app_title_key
   when: app_title_select_query is defined and app_title_select_query.stdout == ""
   tags:
