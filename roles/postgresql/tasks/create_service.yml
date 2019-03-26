@@ -5,9 +5,6 @@
     dest: "/usr/lib/systemd/system/postgresql-{{postgres_version}}.service"
   notify: restart postgresql service
 
-- name: force all notified handlers to run at this point
-  meta: flush_handlers
-
 - name: Start postgresql service
   systemd:
     name: postgresql-{{postgres_version}}
