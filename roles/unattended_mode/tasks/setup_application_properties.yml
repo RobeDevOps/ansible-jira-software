@@ -6,7 +6,7 @@
   retries: 3
   delay: 5
   until: app_title_select_query.rc == 0
-  ignore_erros: yes
+  ignore_errors: yes
   tags: 
     - setup
 
