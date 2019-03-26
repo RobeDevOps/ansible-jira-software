@@ -8,6 +8,7 @@
 - meta: flush_handlers
 
 - name: Start postgresql service
+  become_user: postgres
   systemd:
     name: postgresql-{{postgres_version}}
     state: started
