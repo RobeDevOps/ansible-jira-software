@@ -52,14 +52,14 @@
     - setup
 
 - name: Insert Base Url property_key
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, property_key) VALUES (10101,'jira.baseurl')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, property_key) VALUES (10501,'jira.baseurl')\";"
   register: insert_base_url_key
   when: base_url_select_query.stdout == ""
   tags:
     - setup
 
 - name: Insert Base Url propertyvalue
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10101, '{{jira_base_url}}')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10501, '{{jira_base_url}}')\";"
   when: base_url_select_query.stdout == "" and insert_base_url_key is success
   tags:
     - setup
