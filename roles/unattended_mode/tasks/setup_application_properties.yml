@@ -26,6 +26,8 @@
   tags: 
     - setup
 
+- debug: msg="{{properties_count}}"
+
 - name: Insert Application Title property_key
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES ({{properties_count.stdout|int + 10000}},'jira.properties','jira.title')\";"
   register: insert_app_title_key
