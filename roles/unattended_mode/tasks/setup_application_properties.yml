@@ -65,7 +65,7 @@
     - setup
 
 - name: Insert Base Url property_key
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES (10213,'jira.properties','jira.baseurl')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertyentry(id, entity_name, property_key) VALUES (10212,'jira.properties','jira.baseurl')\";"
   register: insert_base_url_key
   when: 
     - not ansible_check_mode
@@ -74,7 +74,7 @@
     - setup
 
 - name: Insert Base Url propertyvalue
-  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10213, '{{jira_base_url}}')\";"
+  command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"INSERT INTO propertystring(id, propertyvalue) VALUES (10212, '{{jira_base_url}}')\";"
   when: 
     - not ansible_check_mode
     - base_url_select_query.stdout == ""
