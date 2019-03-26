@@ -1,4 +1,6 @@
 ---
+# TODO - Avoid this process using configuration file 
+# e.g jira-config.properties.
 - name: Select Application Title id
   become_user: postgres
   command: "/usr/pgsql-{{postgres_version}}/bin/psql -U {{jira_db_user}} -d {{jira_db_name}} -t -c \"SELECT PE.id FROM propertyentry PE JOIN propertystring PS ON PE.id=PS.id WHERE PE.property_key = 'jira.title'\";"
