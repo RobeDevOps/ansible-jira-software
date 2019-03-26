@@ -3,5 +3,6 @@
 - import_tasks: unattended_installation.yml
 - import_tasks: set_jira_user.yml
 - import_tasks: ensure_jira_owner.yml
-- import_tasks: create_jira_service.yml
 - import_tasks: setup_application_properties.yml
+- import_tasks: create_jira_service.yml
+
