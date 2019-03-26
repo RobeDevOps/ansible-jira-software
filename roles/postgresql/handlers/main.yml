@@ -1,5 +1,5 @@
 ---
-- name: Reboot postgresql
+- name: restart postgresql service
   become: yes
   systemd:
     name: "postgresql-{{postgres_version}}"
