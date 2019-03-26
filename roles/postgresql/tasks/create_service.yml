@@ -1,5 +1,6 @@
 ---
 - name: Create systemd service | postgresql-{{postgres_version}}
+  become_user: postgres
   template:
     src: "postgresql-{{postgres_version}}.service.j2"
     dest: "/usr/lib/systemd/system/postgresql-{{postgres_version}}.service"

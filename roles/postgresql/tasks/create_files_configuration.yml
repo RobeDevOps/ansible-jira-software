@@ -1,5 +1,6 @@
 ---
 - name: Configuring postgres files
+  become_user: postgres
   template:
     src: "{{item}}.conf.j2"
     dest: "/var/lib/pgsql/{{postgres_version}}/data/{{item}}.conf"
