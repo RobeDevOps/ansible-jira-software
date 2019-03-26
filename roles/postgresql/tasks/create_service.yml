@@ -1,6 +1,5 @@
 ---
 - name: Create systemd service | postgresql-{{postgres_version}}
-  become_user: postgres
   template:
     src: "postgresql-{{postgres_version}}.service.j2"
     dest: "/usr/lib/systemd/system/postgresql-{{postgres_version}}.service"
@@ -9,7 +8,6 @@
 - meta: flush_handlers
 
 - name: Start postgresql service
-  become_user: postgres
   systemd:
     name: postgresql-{{postgres_version}}
     state: started
