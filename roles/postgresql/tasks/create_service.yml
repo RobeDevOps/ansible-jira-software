@@ -3,7 +3,7 @@
   template:
     src: "postgresql-{{postgres_version}}.service.j2"
     dest: "/usr/lib/systemd/system/postgresql-{{postgres_version}}.service"
-  notify: restart posgresql service
+  notify: restart postgresql service
 
 - name: Start postgresql service
   systemd:
