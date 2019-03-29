@@ -244,9 +244,9 @@ _________________________________
 Summary 
 --------------------------------
 
-*What is does for system*:
+**What is does for system**:
 
-[x] Create the jira system user: This user is the jira directories owner and it is used as dedicated user to run the jira service
+- [x] Create the jira system user: This user is the jira directories owner and it is used as dedicated user to run the jira service
 
 **What is does for database**
 
