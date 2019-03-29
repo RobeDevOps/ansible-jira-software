@@ -240,6 +240,9 @@ ansible-playbook main.yml -i inventory/hosts.ini -vv
 ansible-playbook main.yml -i inventory/hosts.ini -vvv
 ``` 
 _________________________________
+
+Pending
+--------------------------------
 **There are more configuration files**: There other configuration files that provides more flexibility and automation but those are not implemented yet in this solution:
 
 **```jira-application.properties```**: allows to defined jira_jome.
@@ -247,3 +250,12 @@ _________________________________
 **```setenv.sh```**: JAVA args and memory setup and more.
 
 All these can be added under **unattended_mode** role or a more general role that can be reused on any installed JIRA solution. 
+
+TODO
+--------------------------------
+
+- [ ] Automate the JIRA Application Properties Configuration: the jira-config.properties is loading the properties but still getting the wizard step.
+- [ ] Automate the JIRA License creation: It can be done doing some alter tasks on database table ```productlicense```. Still pending
+- [ ] Automate the Language configuration
+- [ ] Automate or skip the email configuration 
+- [ ] Automate the admin step configuration.
