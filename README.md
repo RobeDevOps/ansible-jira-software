@@ -241,7 +241,37 @@ ansible-playbook main.yml -i inventory/hosts.ini -vvv
 ``` 
 _________________________________
 
-Pending
+Summary 
+--------------------------------
+
+*What is does for system*:
+
+[x] Create the jira system user: This user is the jira directories owner and it is used as dedicated user to run the jira service
+
+**What is does for database**
+
+- [x] Install Postgresql-<version>: version 9.6 in this case
+- [x] Initdb under ```/var/lib/pgsql/<version>/data``` 
+- [x] Configure the ```postgresql.conf``` and ```pg_hba.conf``` files
+- [x] Create the ```postgresql-<version>.service```
+- [x] Enable the ```postgresql-<version>.service```
+- [x] Create the jira database: in this case the database name is **jiradb**
+- [x] Create and grant permissions to the database user **jirauser**
+
+**What is does for jira server**
+
+- [x] Create jira install directory as ```<jira_install_directory>``` under ```/opt/atlassian/jira```
+- [x] Create jira home directory as ```<jira_install_directory>``` under ```/var/atlassian/jira```
+- [x] Pull the jira binary for [Linux installation](https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.0.2-x64.bin).
+- [x] Reuse ```response.varfile``` with [unattended mode installation process](https://confluence.atlassian.com/adminjiraserver/unattended-installation-938846846.html). *So it is required to install at least JIRA once and then reuse the file ```<jira_install_directory>/.install4j/response.varfile``` file.
+- [x] Configure the ```<jira_install_directory>/bin/user.sh```
+- [x] Set **jira** user as owner for ```<jira_install_directory>``` and ```<jira_home_directory>```
+- [x] Enable the ```postgresql-<version>.service```
+- [x] Create, enable and start the jira systemd service.
+- [x] Configure the ```<jira_home_directory>/jira-config.properties``` but still getting the wizard step on the browser. **Need more work**
+
+_________________________________
+TO-DO or *Pending*
 --------------------------------
 **There are more configuration files**: There other configuration files that provides more flexibility and automation but those are not implemented yet in this solution:
 
@@ -250,9 +280,6 @@ Pending
 **```setenv.sh```**: JAVA args and memory setup and more.
 
 All these can be added under **unattended_mode** role or a more general role that can be reused on any installed JIRA solution. 
-
-TODO
---------------------------------
 
 - [ ] Automate the JIRA Application Properties Configuration: the jira-config.properties is loading the properties but still getting the wizard step.
 - [ ] Automate the JIRA License creation: It can be done doing some alter tasks on database table ```productlicense```. Still pending
