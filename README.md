@@ -34,31 +34,38 @@ Jira Database requirements
 The following requirements were developed using the **postgresql** role.
 
 *Install postgresql server and packages dependencies*
-**Description**: Install postgreql-<version>. In this case the version used is 9.6 but any previous version (supported by Jira) should be well installed using the playbook tasks	
+
+**Description**: Install postgreql-<version>. In this case the version used is 9.6 but any previous version (supported by Jira) should be well installed using the playbook tasks
+
 **ansible task**: ```postgres/tasks/install_postgres.yml```
 _________________________________
 *Create and Start postgresql-<version>.service service*
+
 **Description:** Create the service as systemd service and allow easily to start/stop/restart the service and enabled for failover use cases.
+
 **ansible task**: ```postgresql/tasks/create_service.yml```
 
 _________________________________
 *Configure postgresql.conf and pg_hba.conf file*
+
 **Description**: There are two main files:
     1. postgresql.conf: enable to listen any connections. For production solutions should be ip address
     2. pg_hba.conf: required to allow connection for ip address also.
-**ansible task**: ```postgresql/tasks/create_files_configuration.yml```
 
+**ansible task**: ```postgresql/tasks/create_files_configuration.yml```
 _________________________________
 *Create JIRA database is and database user*
+
 **Description**: This task create the Jira database and user. This values are required by the dbconfig.xml configuration file and it is required to skip the steps of database configuration in the web browser wizard. The user is granted with the permission of SELECT, INSERT, UPDATE, DELETE.
 *psycopg2 is a package required by Ansible in order to use the postgresql_db module*
-**ansible task**: ```postgresql/tasks/create_and_configure_db.yml```
 
+**ansible task**: ```postgresql/tasks/create_and_configure_db.yml```
 _________________________________
 *Create the dbconfig.xml file*
-**Description**:	In order to skip the database setup properties from the wizard the dbconfig.xml files contains all the required information for the database. (this can be done by unattended_mode role)
-**ansible task**: ```postgresql/tasks/create_dbconfig_xml.yml```
 
+**Description**: In order to skip the database setup properties from the wizard the dbconfig.xml files contains all the required information for the database. (this can be done by unattended_mode role)
+
+**ansible task**: ```postgresql/tasks/create_dbconfig_xml.yml```
 _________________________________
 Postgres Role
 ----------------------------
@@ -97,8 +104,10 @@ The whole playbooks was developed using the Atlassian documentation for unattend
 Based on those links the **unattended_mode** role was developed:
 
 *Create system jira user*
+
 **Description**: This task creates a dedicated user **jira user** that allows to run the service and own the JIRA directories. The user is created by the ansible role: **user** but the specification is defined under the ```<jira_install_dir>/bin/user.sh``` file with the **unattended_mode** role. 
 *The user role is executed in conjunction posgtres also due the ```<jira_home_directory>``` is required when ```dbconfig.xml``` is created. 
+
 **ansible_tasks**:
 | Role            | Task                                          |
 |-----------------|-----------------------------------------------|
@@ -107,11 +116,12 @@ Based on those links the **unattended_mode** role was developed:
 _________________________________
 
 *Create JIRA directories*
+
 **Description**: JIRA requires two main directory: 
 1. ```<jira_install_directory>```: where all the binaries and default configuration are hosted. 
 2. ```<jira_home_directory>```: where data, logs, cache, indexes, db and custom configuration is hosted like ```jira-application.properties```, ```jira-config.properties``` and ```dbconfig.xml``. This directory needs to be owned by JIRA user created by **user** role.
-**ansible task**: ```unattended_mode/tasks/create_jira_directories.yml```
 
+**ansible task**: ```unattended_mode/tasks/create_jira_directories.yml```
 _________________________________
 *Install JIRA as unattended_mode*
 
@@ -140,16 +150,20 @@ portChoice=custom
 
 _________________________________
 *Ensure all the directories are owner by JIRA system user*:
+
 **Description**: It is mandatory to ensure and grant the right permissions to the ```<jira_install_directory>``` and ```<jira_home_directory>``` directories to avoid any error when service starts.	
 **ansible task**: ```unattended_mode/tasks/ensure_jira_owner.yml```
 
 _________________________________
 *Create jira service*
-**Description**: Create a systemd service for JIRA to allow an easily way to start/stop/restart the service. Also enabled feature allows to start automatically in case of node failover.	
+
+**Description**: Create a systemd service for JIRA to allow an easily way to start/stop/restart the service. Also enabled feature allows to start automatically in case of node failover.
+
 **ansible task**: ```unattended_mode/tasks/create_jira_service.yml```
 
 _________________________________
 *Configure Application properties*	
+
 **Description**: In order to skip the application properties from the web browser wizard, it task defines all these properties in the jira-config.properties file. This information should be loaded once Jira is restarted (**so far is not working and still working on this step**).
 The file is hosted at ```<jira_home_directory>/jira-config.properties```.
 
@@ -160,6 +174,7 @@ jira.title=Jira Ansible
 jira.baseurl=http://jira.ansible.com
 jira.mode=private
 ```
+
 **ansible task**: ```unattended_mode/tasks/create_jira_config_properties.yml```
 
 _________________________________
