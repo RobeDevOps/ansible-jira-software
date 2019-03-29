@@ -109,6 +109,7 @@ Based on those links the **unattended_mode** role was developed:
 *The user role is executed in conjunction posgtres also due the ```<jira_home_directory>``` is required when ```dbconfig.xml``` is created. 
 
 **ansible_tasks**:
+
 | Role            | Task                                          |
 |-----------------|-----------------------------------------------|
 | user            | ```user/tasks/main.yml```                     |
